@@ -1,2 +1,0 @@
-# Refresher
-Learning purposes
