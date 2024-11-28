@@ -68,3 +68,10 @@ function App() {
 }
 
 export default App
+
+
+// npm run build will make a dist folder
+
+// dist is the development version 
+
+// npm run preview will show the development version
