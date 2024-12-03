@@ -65,6 +65,7 @@ const tBet = howMuchBet(amt)
 console.log(amt, "Lines\t", amtofLines, "\tTotal bet\t",tBet)
 */
 
+/* Simple syntax things
 // Object type
 let person ={
     firstName: 'John',
@@ -84,3 +85,6 @@ switch (weekday){
     case 2 : day = 'tuesday'; break;
     default : day = 'not a valid day';
 }
+*/
+
+// DOM 
