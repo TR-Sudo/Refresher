@@ -1,5 +1,8 @@
-const {readFile,watchFile, writeFile} = require('fs')//async method
+const {readFile,watchFile, writeFile} = require('fs')
+//async method so you can serve bunch of users
 
+
+console.log("Start")
 readFile('./content/first.txt','utf8', (error,res)=> {
     if(error){
         console.log(error)
@@ -14,7 +17,7 @@ readFile('./content/first.txt','utf8', (error,res)=> {
             }
             else{
                 const second = res;
-                writeFile('./content/result-sync.txt',
+                writeFile('./content/results-sync.txt',
                     `Here is the res: ${first},${second}`,
                     (e,res)=>{
                         if (e){
@@ -22,7 +25,7 @@ readFile('./content/first.txt','utf8', (error,res)=> {
                             return
                         }
                         else{
-                            console.log(res)
+                            console.log('done with this task')
                         }
                     }
                 )
@@ -32,3 +35,4 @@ readFile('./content/first.txt','utf8', (error,res)=> {
 
     }
 })
+console.log("starting the next task")
