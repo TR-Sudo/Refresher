@@ -22,23 +22,24 @@ console.log("Hello People")
 */
 // callback functions are functions that recieve input from another function
 
-const { error } = require('console')
-const {readFile} = require('fs')
+// Streams
+// Writeable
+// read
+// duplex
+// transform sequentially
 
-const getText= (path)=>{
-    return new Promise((resolve,reject)=>{
-        readFile(path,'utf8',(e,data)=>{
-            if(e){
-                reject(e)
-            }
-            else{
-                resolve(data)
-            }
-        })
-    })
-}
+// read stream allows you to use streams instead of string (for big files)
+
+const {createReadStream} = require('fs')
+
+const stream = createReadStream('./content/big.txt', {highWaterMark:90000,encoding:'utf-8'})
+
+stream.on('data',(res)=>{
+    console.log(res)
+})
+stream.on('error',(e)=>{
+    console.log(e)
+})
 
 
-getText('./content/first.txt')
-    .then(res=>console.log(res))
-    .catch((e)=>console.log(e))
+
