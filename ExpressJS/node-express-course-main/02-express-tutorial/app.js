@@ -1,45 +1,51 @@
-console.log('Express Tutorial')
-const {readFileSync} = require('fs')
+const express = require('express')
 
-//get all files
-const HomeP= readFileSync('./navbar-app/index.html')
-const HomeStyles= readFileSync('./navbar-app/styles.css')
-const HomeImage= readFileSync('./navbar-app/logo.svg')
-const HomeLogic= readFileSync('./navbar-app/browser-app.js')
-// you need to make a const for each style and requirement
+const app = express()
 
-const http= require("http")
+// app.get
+// app.post
+// app.put
+// app.delete
+// app.all
+// app.use
+// app.listen
 
-const server=http.createServer((req,res)=>{
-    console.log(req.method,req.url)
-    if(req.url==='/'){
-        res.writeHead(200,{'content-type':'text/html'})// status code 200 ok, html type
-        res.write(HomeP)
-        res.end()//required
-    }
-    else if(req.url==='/about'){
-        res.writeHead(200,{'content-type':'text/html'})// status code 200 ok, html type
-        res.write('<h1>About Page</h1>')
-        res.end()//required
-    }else if(req.url==='/styles.css'){
-        res.writeHead(200,{'content-type':'text/css'})// status code 200 ok, html type
-        res.write(HomeStyles)
-        res.end()//required
-    }else if(req.url==='/logo.svg'){
-        res.writeHead(200,{'content-type':'image/svg+xml'})// status code 200 ok, html type
-        res.write(HomeImage)
-        res.end()//required
-    }else if(req.url==='/browser-app.js'){
-        res.writeHead(200,{'content-type':'text/javascript'})// status code 200 ok, html type
-        res.write(HomeLogic)
-        res.end()//required
-    }else{
-        res.writeHead(404,{'content-type':'text/html'})// status code 404 Not Found, html type
-        res.write('<h1>Not Found</h1>')
-        res.end()//required
-    }
-    console.log('user hit the server')
-    
+/*
+app.get('/',(req,res)=>{//anytime the user is performing a get request on our server
+    res.status(200).send("<h1>Welcome!</h1>")
 })
 
-server.listen(5000)
+app.get('/about',(req,res)=>{//anytime the user is performing a get request on our server
+    res.status(200).send("<h1>About</h1>")
+})
+
+app.all('*',(req,res)=>{//anytime the user is performing any request on our server
+    res.status(404).send('<h1>Not Found</h1>')
+})
+*/
+
+const path=require('path')
+
+// setup static and middleware
+// static means file that server doesnt have to change
+app.use(express.static('./public'))//common convention is public folder of static files
+
+// index.html is also a static file
+/*
+app.get('/',(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'./navbar-app/index.html'))
+       Adding to static assets
+       Server side rendering (SSR)
+    })
+*/
+
+
+
+
+app.get('*',(req,res)=>{
+    res.status(404).send('resource not found')
+})
+
+app.listen(5000,()=>{
+    console.log("Server is listening on port: 5000")
+})
